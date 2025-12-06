@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/img3"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/films"
+            android:textColor="@color/aquamarine"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <EditText
+                android:id="@+id/searchEditText"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:hint="@string/research"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/search_background"
+                android:imeOptions="actionSearch"
+                android:singleLine="true" />
+
+            <Button
+                android:id="@+id/searchButton"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="Поиск"
+                android:textSize="16sp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/button"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:id="@+id/genreMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/genreContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingVertical="8dp">
+
+            <Button
+                android:id="@+id/genre_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Все"
+                android:tag="all"
+                android:textSize="14sp"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/button" />
+
+            <Button
+                android:id="@+id/genre_action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Боевик"
+                android:tag="action"
+                android:textSize="14sp"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/button" />
+
+            <Button
+                android:id="@+id/genre_comedy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Комедия"
+                android:tag="comedy"
+                android:textSize="14sp"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/button" />
+
+            <Button
+                android:id="@+id/genre_drama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Драма"
+                android:tag="drama"
+                android:textSize="14sp"
+                android:padding="16dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/button"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/genre_horror"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ужасы"
+                android:tag="horror"
+                android:textSize="14sp"
+                android:padding="16dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/button"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/genre_fantasy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Фэнтези"
+                android:tag="fantasy"
+                android:textSize="14sp"
+                android:padding="16dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/button"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/genre_scifi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sci-Fi"
+                android:tag="scifi"
+                android:textSize="14sp"
+                android:padding="16dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/button"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/genre_animation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Анимация"
+                android:tag="animation"
+                android:textSize="14sp"
+                android:padding="16dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/button"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone" />
+
+        <GridView
+            android:id="@+id/gridView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:numColumns="3"
+            android:verticalSpacing="16dp"
+            android:horizontalSpacing="16dp"
+            android:gravity="center"
+            android:stretchMode="columnWidth" />
+
+    </RelativeLayout>
+
+</LinearLayout>

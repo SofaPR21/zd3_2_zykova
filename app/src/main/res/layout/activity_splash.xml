@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    tools:context=".MainActivity"
+    android:background="@drawable/img">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="MADVENTURE"
+        android:textColor="@color/aquamarine"
+        android:textSize="46sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center_horizontal" />
+
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rediscover the world"
+        android:textColor="@color/aquamarine"
+        android:textSize="28sp"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="4dp" />
+
+</LinearLayout>

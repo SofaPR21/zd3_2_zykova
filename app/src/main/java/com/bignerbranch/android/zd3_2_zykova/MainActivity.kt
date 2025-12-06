@@ -16,10 +16,10 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -168,14 +168,14 @@ class MainActivity : AppCompatActivity() {
                     adapter.notifyDataSetChanged()
 
                     if (movieList.isEmpty()) {
-                        Toast.makeText(this@MainActivity, "Фильмы не найдены", Toast.LENGTH_SHORT).show()
+                        Snackbar.make(gridView, "Фильмы не найдены", Snackbar.LENGTH_SHORT).show()
                     }
                 } else {
-                    Toast.makeText(this@MainActivity, "Фильмы не найдены: ${response.error}", Toast.LENGTH_SHORT).show()
+                    Snackbar.make(gridView, "Фильмы не найдены: ${response.error}", Snackbar.LENGTH_SHORT).show()
                     loadSampleMovies()
                 }
             } catch (e: Exception) {
-                Toast.makeText(this@MainActivity, "Ошибка загрузки: ${e.message}", Toast.LENGTH_SHORT).show()
+                Snackbar.make(gridView, "Ошибка загрузки: ${e.message}", Snackbar.LENGTH_SHORT).show()
                 e.printStackTrace()
                 loadSampleMovies()
             } finally {
@@ -219,14 +219,14 @@ class MainActivity : AppCompatActivity() {
                     adapter.notifyDataSetChanged()
 
                     if (movieList.isEmpty()) {
-                        Toast.makeText(this@MainActivity, "Фильмы не найдены", Toast.LENGTH_SHORT).show()
+                        Snackbar.make(gridView, "Фильмы не найдены", Snackbar.LENGTH_SHORT).show()
                     }
                 } else {
-                    Toast.makeText(this@MainActivity, "Фильмы не найдены: ${response.error}", Toast.LENGTH_SHORT).show()
+                    Snackbar.make(gridView, "Фильмы не найдены: ${response.error}", Snackbar.LENGTH_SHORT).show()
                     loadSampleMovies()
                 }
             } catch (e: Exception) {
-                Toast.makeText(this@MainActivity, "Ошибка загрузки: ${e.message}", Toast.LENGTH_SHORT).show()
+                Snackbar.make(gridView, "Ошибка загрузки: ${e.message}", Snackbar.LENGTH_SHORT).show()
                 e.printStackTrace()
                 loadSampleMovies()
             } finally {

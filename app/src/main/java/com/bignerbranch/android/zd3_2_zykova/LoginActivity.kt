@@ -23,8 +23,6 @@ class LoginActivity : AppCompatActivity() {
         editTextPassword = findViewById(R.id.editTextPassword)
         buttonLogin = findViewById(R.id.buttonLogin)
 
-
-
         buttonLogin.setOnClickListener {
             val username = editTextUsername.text.toString()
             val password = editTextPassword.text.toString()
@@ -38,6 +36,4 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
-
 }

@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var searchButton: Button
     private lateinit var titleText: TextView
 
-    // Жанры с их поисковыми запросами
     private val genres = listOf(
         Genre("Все", ""),
         Genre("Боевик", "action"),
@@ -60,18 +59,14 @@ class MainActivity : AppCompatActivity() {
         adapter = MovieAdapter(movieList)
         gridView.adapter = adapter
 
-        // Настраиваем обработчики кнопок жанров
         setupGenreButtons()
 
-        // Загружаем фильмы при запуске (все жанры)
         loadMoviesByGenre(currentGenre)
 
-        // Обработчик кнопки поиска
         searchButton.setOnClickListener {
             performSearch()
         }
 
-        // Обработчик клавиши Enter в поле поиска
         searchEditText.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 performSearch()
@@ -81,7 +76,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Для телевизора - обработка нажатия OK/Enter на поле поиска
         searchEditText.setOnKeyListener { _, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                 performSearch()
@@ -104,7 +98,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupGenreButtons() {
-        // Находим все кнопки жанров и настраиваем их
         val genreButtons = listOf(
             findViewById<Button>(R.id.genre_all),
             findViewById<Button>(R.id.genre_action),
@@ -116,21 +109,17 @@ class MainActivity : AppCompatActivity() {
             findViewById<Button>(R.id.genre_animation)
         )
 
-        // Устанавливаем начальное состояние
         updateGenreButtons(genreButtons)
 
-        // Добавляем обработчики кликов
         genreButtons.forEachIndexed { index, button ->
             button.setOnClickListener {
                 selectGenre(genres[index], genreButtons)
             }
 
-            // Для TV-версии - обработка фокуса
             button.setOnFocusChangeListener { view, hasFocus ->
                 if (hasFocus) {
                     view.isSelected = true
                 } else {
-                    // Проверяем, выбран ли этот жанр
                     view.isSelected = genres[index] == currentGenre
                 }
             }
@@ -141,10 +130,8 @@ class MainActivity : AppCompatActivity() {
         currentGenre = genre
         titleText.text = if (genre.searchQuery.isEmpty()) "Все фильмы" else "Жанр: ${genre.name}"
 
-        // Обновляем стили кнопок
         updateGenreButtons(genreButtons)
 
-        // Загружаем фильмы выбранного жанра
         loadMoviesByGenre(genre)
     }
 
@@ -197,19 +184,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Остальные методы остаются без изменений...
     private fun performSearch() {
         val query = searchEditText.text.toString().trim()
         if (query.isNotEmpty()) {
-            // Скрываем клавиатуру
             val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(searchEditText.windowToken, 0)
 
-            // Выполняем поиск
             loadMovies(query)
             titleText.text = "Результаты поиска: $query"
         } else {
-            // Если поиск пустой, возвращаемся к текущему жанру
             loadMoviesByGenre(currentGenre)
             titleText.text = if (currentGenre.searchQuery.isEmpty()) "Все фильмы" else "Жанр: ${currentGenre.name}"
         }

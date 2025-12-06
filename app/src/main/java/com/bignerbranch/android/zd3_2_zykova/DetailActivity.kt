@@ -27,43 +27,35 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        // Инициализация всех View
         imageView = findViewById(R.id.detail_image)
         titleView = findViewById(R.id.detail_title)
         yearView = findViewById(R.id.detail_year)
         descriptionView = findViewById(R.id.detail_description)
         progressBar = findViewById(R.id.progressBar)
         backButton = findViewById(R.id.backButton)
-        ratingView = findViewById(R.id.detail_rating)  // Уже есть в разметке
-        runtimeView = findViewById(R.id.detail_runtime) // Уже есть в разметке
+        ratingView = findViewById(R.id.detail_rating)
+        runtimeView = findViewById(R.id.detail_runtime)
 
-        // Получаем данные из Intent
         val title = intent.getStringExtra("title") ?: ""
         val poster = intent.getStringExtra("poster") ?: ""
         val year = intent.getStringExtra("year") ?: ""
         val imdbID = intent.getStringExtra("imdbID") ?: ""
 
-        // Устанавливаем базовую информацию
         titleView.text = title
         yearView.text = "Год: $year"
 
-        // Устанавливаем значения по умолчанию
         descriptionView.text = "Загрузка описания..."
         ratingView.text = "IMDb: Загрузка..."
         runtimeView.text = "Длительность: Загрузка..."
 
-        // Показываем прогресс бар
         progressBar.visibility = View.VISIBLE
 
-        // Загружаем изображение
         Glide.with(this)
             .load(poster)
             .into(imageView)
 
-        // Настраиваем кнопку назад
         setupBackButton()
 
-        // Если imdbID не пустой, загружаем детали фильма
         if (imdbID.isNotEmpty()) {
             loadMovieDetails(imdbID)
         } else {
@@ -74,10 +66,8 @@ class DetailActivity : AppCompatActivity() {
     private fun loadMovieDetails(imdbID: String) {
         lifecycleScope.launch {
             try {
-                // Используем ваш существующий API метод
                 val response = ApiService.api.getMovieDetails(imdbID)
                 if (response.response == "True") {
-                    // Успешно получили детали - обновляем все поля
                     updateMovieDetails(response)
                 } else {
                     showError("Фильм не найден")
@@ -91,9 +81,6 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun updateMovieDetails(response: MovieDetailResponse) {
-        // Обновляем ВСЕ поля из ответа API
-
-        // Основное описание
         val plot = if (response.plot != "N/A" && response.plot.isNotEmpty()) {
             response.plot
         } else {
@@ -101,7 +88,6 @@ class DetailActivity : AppCompatActivity() {
         }
         descriptionView.text = plot
 
-        // Рейтинг IMDb
         val rating = if (response.imdbRating != "N/A" && response.imdbRating.isNotEmpty()) {
             response.imdbRating
         } else {
@@ -109,24 +95,12 @@ class DetailActivity : AppCompatActivity() {
         }
         ratingView.text = "IMDb: $rating"
 
-        // Длительность
         val runtime = if (response.runtime != "N/A" && response.runtime.isNotEmpty()) {
             response.runtime
         } else {
             "N/A"
         }
         runtimeView.text = "Длительность: $runtime"
-
-        // Можно также обновить другие поля если нужно:
-        // Например, добавить жанр или режиссера в существующие TextView
-
-        // Можно добавить жанр в yearView или создать новое поле
-        // val genre = if (response.genre != "N/A") response.genre else ""
-        // yearView.text = "Год: ${response.year} | ${genre.split(",").firstOrNull()}"
-
-        // Или добавить режиссера в заголовок
-        // val director = if (response.director != "N/A") "Реж. ${response.director}" else ""
-        // titleView.text = "${response.title}\n$director"
     }
 
     private fun showError(errorMessage: String = "Произошла ошибка") {
@@ -136,7 +110,6 @@ class DetailActivity : AppCompatActivity() {
             "Информация о фильме временно недоступна."
         }
 
-        // Устанавливаем значения по умолчанию при ошибке
         ratingView.text = "IMDb: N/A"
         runtimeView.text = "Длительность: N/A"
 
@@ -148,14 +121,10 @@ class DetailActivity : AppCompatActivity() {
             finish()
         }
 
-        // Для TV-версии - обработка фокуса
         backButton.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
-                // При фокусе - выделяем кнопку
                 view.setBackgroundColor(android.graphics.Color.parseColor("#00cc00"))
             } else {
-                // Без фокуса - возвращаем обычный фон
-                // Используйте ваш drawable или цвет
                 view.setBackgroundResource(R.drawable.button)
             }
         }
